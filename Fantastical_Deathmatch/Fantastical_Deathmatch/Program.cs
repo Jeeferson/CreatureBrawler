@@ -6,33 +6,19 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Fantastical_Deathmatch
+namespace Fantastical_Deathmatch.UI
 {
 	public class Program
 	{
 		static void Main(string[] args)
 		{
-		    Goblin g1 = new Goblin();
+            Workflow work = new Workflow();
 
-			g1.SetName("Grobgar the Destroyer");
-			g1.SetHitPoints(40);
-
-			Goblin g2 = new Goblin();
-
-			g2.SetName("Xanzar the Dragonstabber");
-			g2.SetHitPoints(40);
-			Random _rng = new Random();
-			int coinflip = _rng.Next(1,2);
-
-			while (g1.IsDead() == false && g2.IsDead() == false)
-			{
-				Thread.Sleep(3000);
-				Console.Clear();
-				if (coinflip == 1) { g1.Attack(g2); coinflip = 2; }
-				else { g2.Attack(g1); coinflip = 1; }
-			}
-			Console.WriteLine("And we have a winnnnnneerrrrr!");
-			Console.ReadLine();
+            work.NameSelection();
+            work.CoinFlip();
+            var c1 = work.SummonCreature();
+            var c2 = work.SummonCreature();
+            work.Battle(c1, c2);
 		}
 	}
 }

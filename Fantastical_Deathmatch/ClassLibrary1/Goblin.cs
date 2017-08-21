@@ -6,42 +6,34 @@ using System.Threading.Tasks;
 
 namespace ClassLibrary1
 {
-    public class Goblin 
+    public class Goblin : Creature
     {
-		//this is for makin the random nombers
-		private static Random _rng = new Random();
+        public string _creatureName;
 
-		private int _hitPoints;
-		private string _name;
-		private bool _isDead;
+        string[] nameGenerator = new string[] 
+        { "Grogar", "Xanzar", "Allaar", "Boogar", "Stagarr", "Cranbar", "Snowgar" };
 
-		public int GetHitPoints() { return _hitPoints; }
-		public int SetHitPoints(int hp) {
-			_hitPoints = hp + _rng.Next(10);
-			return _hitPoints;
-		}
+        string[] titleGenerator = new string[]
+        { "Wolftamer", "Dragonstabber", "Tinkerer", "Chef", "Destroyer", "Explosive", "Orc Annoyer" };
 
-		public string GetName() { return _name; }
-		public string SetName(string name) { _name = name; return _name; }
+        string[] clanGenerator = new string[]
+        { "Stonebird Clan", "Humanslayer Clan", "Wyrmskin Clan", "Rider Clan"};
 
-		public bool IsDead() { return _isDead; }
+        private static Random _rng = new Random();
 
-		public void Attack(Goblin enemy)
-		{
-			int damage = _rng.Next(1,10);
-			enemy.Hit(damage);
-			Console.WriteLine($"{_name} attacks for {damage}.  {enemy.GetName()} has {enemy.GetHitPoints()} left");
-		}
+        public Goblin()
+        {
+            _creatureName = nameGenerator[_rng.Next(6)] + " the " + titleGenerator[_rng.Next(6)] + " of " + clanGenerator[_rng.Next(3)];
 
-		private void Hit(int damage)
-		{
-			_hitPoints -= damage;
-			if (_hitPoints <= 0)
-			{
-				Console.WriteLine($"{_name} has died. RIP");
-				_isDead = true;
-			}
-		}
+            _dodge = 4;
+
+            _hitPoints -= 5;
+
+            _armor += _rng.Next(0,2);
+        }
+
+
+
 
 	}
 }
